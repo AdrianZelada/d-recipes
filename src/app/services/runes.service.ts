@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { map, of } from 'rxjs';
 import { RUNES } from 'src/stores/runes';
 
 @Injectable({providedIn: 'root'})
@@ -8,6 +8,19 @@ export class RunesService {
   }
 
   getData() {
-    return of(RUNES);
+    return of(RUNES).pipe(
+      map((runes) => {
+        return runes.map((rune) => {
+          return {
+            ...rune,
+            img: this.buildNameImage(rune.name)
+          }
+        });
+      })
+    );
+  }
+
+  buildNameImage(name: string){
+    return `./assets/img/rune${name}.jpg`
   }
 }
