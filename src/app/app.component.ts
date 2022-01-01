@@ -29,25 +29,14 @@ export class AppComponent {
     })
     this._runesService.getData().subscribe((runes) => {
       this.runes = runes;
-      console.log("this.runes");
-      console.log(this.runes);
     });
     const catalogs = this._recipesService.getCatalogs();
-    console.log("catalogs");
-    console.log(catalogs);
 
     this._recipesService.recipesSubject.subscribe((recipes: ViewRecipes) => {
       this.recipes = {
         ...recipes
       }
-      console.log(this.recipes);
-
     });
-
-    this.form.valueChanges.subscribe((formChanges) => {
-      console.log(formChanges);
-    })
-
   }
 
   filter() {
@@ -72,10 +61,7 @@ export class AppComponent {
     }
 
     this.showStatus = runes.length > 0;
-    console.log(filter);
     this._recipesService.filterRecipes(filter);
-
-
   }
 
 
